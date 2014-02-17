@@ -43,7 +43,7 @@ function setWatchers(module, deps) {
   });
 }
 
-module.exports = function(opts) {
+module.exports = function(opts, callback) {
   opts = opts || {};
 
   if (!opts.src) {
@@ -69,7 +69,7 @@ module.exports = function(opts) {
 
     if (opts.once) {
       log("`once` set");
-      compile(module, function(err) {
+      compile(module, callback || function(err) {
         if (err) {
           throw err;
         }
