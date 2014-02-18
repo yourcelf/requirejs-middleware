@@ -49,3 +49,21 @@ See the full example in [examples/almond/server.js](examples/almond/server.js).
     * `include` - Include this module in the output file. Required if you are optimizing with almond.
     * `name` - Name of the module to optimize first. Defaults to [almond](https://github.com/jrburke/almond)
 
+## "once" callback
+
+When using `options.once == true`, a callback can be specified as the second argument to `requirejsMiddleware` which is executed once for each module listed in `options.modules` after optimization.  The callback is given two parameters:
+
+* `err` - non-null if optimization failed.
+* `deps` - a list of paths to files successfully optimized.
+
+Example:
+```
+requirejsMiddleware({
+    once: true,
+    ...
+}, function(err, deps) {
+    if (err) {
+        console.log(err);
+    }
+});
+```
